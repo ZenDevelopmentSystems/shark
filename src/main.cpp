@@ -313,7 +313,7 @@ bool doIgnoreAxis(int* ignoreIds, int ignoreCount, int axisId)
 //LED status light
 
 #if ENABLE_CAR
-Gpio* pGpio = NULL;
+//Gpio* pGpio = NULL;
 #endif
 
 int status_pin = 16;
@@ -335,7 +335,8 @@ void blink_led_status(float rate)
 
 void led_status(bool onOff)
 {
-#if ENABLE_CAR
+#if 0
+ENABLE_CAR
 
     if(pGpio == NULL)
         pGpio = new Gpio(2);

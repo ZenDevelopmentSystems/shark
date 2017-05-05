@@ -1,5 +1,5 @@
 
-add_library(car Car.cpp Gpio.cpp I2cBus.cpp PCA9685.cpp Pin.cpp PwmEsc.cpp PwmServo.cpp RaspberryPi.cpp)
+add_library(car Car.cpp I2cBus.cpp PCA9685.cpp PwmEsc.cpp PwmServo.cpp )
 
 # Make sure the compiler can find include files for our car library
 # when other libraries or executables link to Hello

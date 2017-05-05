@@ -9,7 +9,7 @@ include(CheckLibraryExists)
 
 
 # -fopenmp -fpermissive
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCPU_ONLY -std=c++11 -fopenmp -mfpu=neon-vfpv4 -funsafe-math-optimizations -ftree-vectorize -fomit-frame-pointer")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCPU_ONLY -std=c++11 -fopenmp -funsafe-math-optimizations -ftree-vectorize -fomit-frame-pointer")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fopenmp")
 
 #enable for debug builds.
@@ -45,13 +45,9 @@ TARGET_LINK_LIBRARIES(shark zmq czmq pthread)
 
 #conditional libraries
 
-if(HAVE_WIRINGPI)
-  add_subdirectory(contrib/mcqueen/car)
-  TARGET_LINK_LIBRARIES(shark car ${LIB_WIRINGPI})
-  set (ENABLE_CAR 1)
-else()
-  set (ENABLE_CAR 0)
-endif()
+add_subdirectory(contrib/mcqueen/car)
+TARGET_LINK_LIBRARIES(shark car)
+set (ENABLE_CAR 1)
 
 if(HAVE_RASPICAM)
   TARGET_LINK_LIBRARIES(shark ${LIB_RASPICAM})

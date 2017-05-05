@@ -55,7 +55,7 @@ def go(model_path, pred_address, pred_control_address):
     except:
         model = None
         print('failed to open model:', model_path)
-        #print(traceback.format_exc())
+        print(traceback.format_exc())
     
     _row, _col, _ch = conf.row, conf.col, conf.ch
     view_image = False

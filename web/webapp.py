@@ -23,7 +23,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 sys.path.append('..')
-import led_status
+#import led_status
 import conf
 
 cherrypy.server.socket_host = '0.0.0.0'
@@ -68,8 +68,8 @@ class WebSite(object):
     #we can init any variables we want to persist. These
     #will be available for any of our methods
     def __init__(self):
-        led_status.setup(conf.status_pin)
-        led_status.blink(conf.status_pin, n_times=3, delay=0.5)
+        #led_status.setup(conf.status_pin)
+        #led_status.blink(conf.status_pin, n_times=3, delay=0.5)
         self.pred_control_address = ('127.0.0.1', conf.keras_predict_server_control_port)
         self.last_frame = Image.open('./img/shark.jpg')
         self.model_file = "../models/drive"
@@ -647,7 +647,7 @@ class WebSite(object):
                 socket.connect(connect_str)
                 socket.send(command.encode('utf-8'))
                 reply = socket.recv()
-                led_status.blink(conf.status_pin, n_times=10, delay=0.2)
+                #led_status.blink(conf.status_pin, n_times=10, delay=0.2)
                 res.append(reply)
             except:
                 tb = traceback.format_exc()
@@ -814,7 +814,7 @@ class WebSite(object):
             yield(self.home_link())
             yield('<br><a href="/manage_train">train</a><br>\n')
             yield('</body></html>\n')
-            led_status.blink(conf.status_pin, n_times=10, delay=0.2)
+            #led_status.blink(conf.status_pin, n_times=10, delay=0.2)
         return content()
     upload_logs.exposed=True
     upload_logs._cp_config = {'response.stream': True}
@@ -902,7 +902,7 @@ class WebSite(object):
             yield(self.home_link())
             yield('<a href="/start_train">re-train</a><br>')
             yield('</body></html>\n')
-            led_status.blink(conf.status_pin, n_times=10, delay=0.2)
+            #led_status.blink(conf.status_pin, n_times=10, delay=0.2)
 
         return content()
     start_train.exposed = True

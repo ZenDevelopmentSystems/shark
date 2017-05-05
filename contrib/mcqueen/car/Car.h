@@ -12,7 +12,6 @@
 #include "PwmEsc.h"
 #include "PCA9685.h"
 #include "I2cBus.h"
-#include "RaspberryPi.h"
 
 class Car
 {
@@ -53,7 +52,6 @@ public:
 	PwmEsc		*getEsc (void);				// returns a pointer to the esc
 	PCA9685		*getPCA9685 (void);		 	// returns a pointer to the PwmController
 	I2cBus		*getI2cBus (void);			// returns a pointer to the I2cBus object
-	RaspberryPi	*getRaspberryPi (void);		// returns a pointer to the Raspberry Pi
 
 	//int 	getCurrentDirectionPct (void);	// returns current % turn (left is negative. idle is 0. right is positive)
 	//int 	getCurrentSpeedPct (void);		// returns current speed in % (backward is negative. idle is 0. forward is positive)
@@ -66,7 +64,6 @@ private:
 	PwmEsc			*esc;
 	PCA9685			*pwm;
 	I2cBus			*i2c;
-	RaspberryPi		*pi;
 };
 
 #endif /* CAR_H_ */

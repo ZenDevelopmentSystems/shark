@@ -8,7 +8,6 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-#include <wiringPi.h>
 #include "Car.h"
 
 using namespace std;
@@ -19,6 +18,32 @@ int main (int argv, char** args) {
 	cout << "Car is ready ..." << endl;
 	int t = 150;
 	int c;
+    PwmServoConfig steeringConfig;
+    PwmEscConfig escConfig;
+
+    steeringConfig.channel      = 1;
+        steeringConfig.frequency =60;
+        steeringConfig.resolution =4096;
+        steeringConfig.posInit =400;
+        steeringConfig.posStraight=310;
+        steeringConfig.posMinLeft=310;
+        steeringConfig.posMaxLeft=310;
+        steeringConfig.posMinRight=530;
+        steeringConfig.posMaxRight=530;
+
+
+    escConfig.channel =2;
+    escConfig.frequency=60;
+        escConfig.resolution=4096;
+        escConfig.posInit=400;
+        escConfig.posIdle=400;
+        escConfig.posMinForward=450;
+        escConfig.posMaxForward=600;
+        escConfig.posMinReverse=350;
+        escConfig.posMaxReverse=200;
+
+    car.init(&steeringConfig, &escConfig);
+
 
 	car.printStatus();
 
@@ -113,7 +138,7 @@ int main (int argv, char** args) {
 					cin >> in;
 					try { pct = stoi(in); }
 					catch (const invalid_argument& e) { }
-					car.getRaspberryPi()->getGpio()->getPin(pin)->setValue(pct);
+					//car.getRaspberryPi()->getGpio()->getPin(pin)->setValue(pct);
 				}
 				in = "";
 			}

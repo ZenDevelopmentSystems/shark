@@ -10,6 +10,8 @@
 
 #include "PCA9685.h"
 
+void delay (unsigned int howLong);
+
 /*** This class requires a PWM controller class (implemented here as PCA9685) where to send the following commands:
  *
  * int reset (void)							// resets controller

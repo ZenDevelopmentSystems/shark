@@ -1,18 +1,25 @@
-CC=g++-4.7
-CFLAGS=-c -Wall -std=c++11
-CTRAIL=-lwiringPi
+CC=g++
+CFLAGS=-c -Wall -std=c++11 -g
+#CTRAIL=-lwiringPi
+CTRAIL=
 LDFLAGS=
-LDTRAIL=-lwiringPi
+#LDTRAIL=-lwiringPi
+LDTRAIL=
 
 all:			car
 
-car:				RaspberryPi.o I2cBus.o Gpio.o PCA9685.o PwmEsc.o PwmServo.o Car.o app.o
-	$(CC) $(LDFLAGS) Pin.o Gpio.o PwmEsc.o PwmServo.o PCA9685.o I2cBus.o RaspberryPi.o Car.o app.o -o car $(LDTRAIL)
+clean:
+	rm *.o car
+
+#car:				RaspberryPi.o I2cBus.o Gpio.o PCA9685.o PwmEsc.o PwmServo.o Car.o app.o
+#	$(CC) $(LDFLAGS) Pin.o Gpio.o PwmEsc.o PwmServo.o PCA9685.o I2cBus.o RaspberryPi.o Car.o app.o -o car $(LDTRAIL)
+car:				I2cBus.o PCA9685.o PwmEsc.o PwmServo.o Car.o app.o
+	$(CC) $(LDFLAGS) PwmEsc.o PwmServo.o PCA9685.o I2cBus.o Car.o app.o -o car $(LDTRAIL)
 
 app.o: 				Car.o app.cpp
 	$(CC) $(CFLAGS) app.cpp $(CTRAIL)
 
-Car.o:				RaspberryPi.o I2cBus.o PCA9685.o PwmServo.o PwmEsc.o Car.cpp
+Car.o:				I2cBus.o PCA9685.o PwmServo.o PwmEsc.o Car.cpp
 	$(CC) $(CFLAGS) Car.cpp $(CTRAIL)
 
 PwmServo.o:			PCA9685.o PwmServo.cpp
